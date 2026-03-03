@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fooddeliveryapp/screens/MainScreens/AdminScreen.dart';
 import 'package:fooddeliveryapp/screens/MainScreens/DriverScreen.dart';
 import 'package:fooddeliveryapp/screens/MainScreens/HomeScreen.dart';
 import 'package:fooddeliveryapp/screens/MainScreens/OrdersScreen.dart';
@@ -52,9 +51,27 @@ class _MyGnavState extends State<MyGnav> {
   void _buildScreensAndTabs() {
     if (role == 'user') {
       myScreens = [
-        HomeScreen(),
-        OrdersScreen(accountType: role!),
-        ProFileScrren(accountType: role!),
+        ClipRRect(
+          child: HomeScreen(),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          child: OrdersScreen(accountType: role!),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+          child: ProFileScrren(accountType: role!),
+        ),
       ];
       tabs = [
         const GButton(
@@ -90,26 +107,33 @@ class _MyGnavState extends State<MyGnav> {
       ];
     } else if (role == 'admin') {
       myScreens = [
-        HomeScreen(),
-        const AdminScreen(),
-        DriverScreen(accountType: role!),
-        ProFileScrren(accountType: role!),
+        ClipRRect(
+          child: HomeScreen(),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          child: DriverScreen(accountType: role!),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          child: ProFileScrren(accountType: role!),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ];
       tabs = [
         const GButton(
           icon: Icons.home_rounded,
           iconSize: 23,
           text: ' Home',
-          textStyle: TextStyle(
-            fontFamily: 'Ubuntu',
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
-        ),
-        const GButton(
-          icon: Icons.edit_document,
-          iconSize: 23,
-          text: ' Edit Foods',
           textStyle: TextStyle(
             fontFamily: 'Ubuntu',
             fontWeight: FontWeight.bold,
@@ -139,9 +163,27 @@ class _MyGnavState extends State<MyGnav> {
       ];
     } else if (role == 'driver') {
       myScreens = [
-        HomeScreen(),
-        DriverScreen(accountType: role!),
-        ProFileScrren(accountType: role!),
+        ClipRRect(
+          child: HomeScreen(),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          child: DriverScreen(accountType: role!),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+        ClipRRect(
+          child: ProFileScrren(accountType: role!),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ];
       tabs = [
         const GButton(

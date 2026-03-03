@@ -2,10 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fooddeliveryapp/Widgets/OrderItem.dart';
 import 'package:fooddeliveryapp/Widgets/ProfileCategory.dart';
+import 'package:fooddeliveryapp/screens/MainScreens/AdminScreen.dart';
 import 'package:fooddeliveryapp/screens/SubScreens/AccountInfo.dart';
+import 'package:fooddeliveryapp/screens/SubScreens/AddNewFood.dart';
+import 'package:fooddeliveryapp/screens/SubScreens/EditFood.dart';
 import 'package:fooddeliveryapp/screens/SubScreens/ManageDrivers.dart';
+import 'package:fooddeliveryapp/screens/SubScreens/OrderTime.dart';
 import 'package:fooddeliveryapp/screens/SubScreens/Settings.dart';
+import 'package:fooddeliveryapp/screens/SubScreens/change_role.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProFileScrren extends StatelessWidget {
@@ -248,6 +254,76 @@ class ProFileScrren extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ManageDrivers(),
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox(),
+
+            const SizedBox(height: 10),
+
+            accountType == 'admin'
+                ? ProfileCategory(
+                    category: 'Edit Foods',
+                    icon: Icon(Icons.admin_panel_settings_rounded,
+                        color: Colors.grey[100]),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdminScreen(),
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox(),
+
+            const SizedBox(height: 10),
+
+            accountType == 'admin'
+                ? ProfileCategory(
+                    category: 'Add New Food',
+                    icon: Icon(Icons.add_rounded, color: Colors.grey[100]),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddNewFood(),
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox(),
+
+            const SizedBox(height: 10),
+
+            accountType == 'admin'
+                ? ProfileCategory(
+                    category: 'Change Role',
+                    icon: Icon(Icons.edit_rounded, color: Colors.grey[100]),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeRole(),
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox(),
+
+            const SizedBox(height: 10),
+
+            accountType == 'admin'
+                ? ProfileCategory(
+                    category: 'Edit Order Time',
+                    icon: Icon(Icons.access_time_rounded,
+                        color: Colors.grey[100]),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrderTime(),
                         ),
                       );
                     },
