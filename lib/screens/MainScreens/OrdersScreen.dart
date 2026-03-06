@@ -19,6 +19,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        surfaceTintColor: Colors.grey[300],
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         title: const Center(
