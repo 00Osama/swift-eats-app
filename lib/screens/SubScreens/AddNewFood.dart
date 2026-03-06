@@ -241,6 +241,7 @@ class _AddNewFoodState extends State<AddNewFood> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        surfaceTintColor: Colors.grey[300],
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         leading: GestureDetector(
@@ -435,6 +436,7 @@ class _AddNewFoodState extends State<AddNewFood> {
                   style: TextStyle(
                     fontFamily: 'Ubuntu',
                     fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -502,6 +504,7 @@ class _AddNewFoodState extends State<AddNewFood> {
                   style: TextStyle(
                     fontFamily: 'Ubuntu',
                     fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                 ),
               ),

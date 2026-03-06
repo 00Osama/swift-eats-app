@@ -69,7 +69,7 @@ class _ChangeRoleState extends State<ChangeRole> {
           children: [
             Spacer(flex: 1),
             Text(
-              'Change Role',
+              'Change Roles',
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'Ubuntu',

@@ -485,27 +485,40 @@ class _MyGnavState extends State<MyGnav> {
         ),
       );
     }
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+// Colors
+    Color iconColor = isDark ? Colors.grey[400]! : Colors.grey[500]!;
+    Color activeColor = isDark ? Colors.grey[100]! : Colors.grey[800]!;
+    Color tabBorderColor = isDark ? Colors.grey : Colors.white;
+
+// Responsive sizes
+    double navPadding = screenWidth < 600 ? 17 : 30;
+    double tabBorderRadius = screenWidth < 600 ? 20 : 35;
+    double iconSize = screenWidth < 600 ? 24 : 33;
 
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[400],
       body: myScreens.elementAt(_selectedIndex),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 13),
+        padding: const EdgeInsets.all(8.0),
         child: GNav(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          backgroundColor: Colors.grey.shade300,
-          color: Colors.grey[400],
-          activeColor: Colors.grey[800],
-          tabActiveBorder: Border.all(color: Colors.white),
-          tabBorderRadius: 20,
-          padding: const EdgeInsets.all(15),
-          tabs: tabs,
-          selectedIndex: _selectedIndex,
+          color: iconColor,
+          activeColor: activeColor,
+          iconSize: iconSize,
+          tabActiveBorder: Border.all(color: tabBorderColor),
+          tabBorderRadius: tabBorderRadius,
+          padding: EdgeInsets.all(navPadding),
+          curve: Curves.linear,
           onTabChange: (index) {
             setState(() {
               _selectedIndex = index;
             });
           },
+          tabs: tabs,
+          selectedIndex: _selectedIndex,
         ),
       ),
     );

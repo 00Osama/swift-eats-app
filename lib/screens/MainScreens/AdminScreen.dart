@@ -19,21 +19,31 @@ class _AdminScreenState extends State<AdminScreen> {
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
         surfaceTintColor: Colors.grey[300],
-        title: const Center(
-          child: Text(
-            'Admin Screen',
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 110, 124, 148),
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Image.asset(
+              'assets/icons/back-icon.png',
+              width: 15,
             ),
+          ),
+        ),
+        title: Text(
+          'Edit Foods',
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Ubuntu',
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 110, 124, 148),
           ),
         ),
       ),
       body: ListView(
         children: [
-          const SizedBox(height: 10),
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: FoodsNonActive(),

@@ -18,22 +18,39 @@ class FoodBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    /// responsive card width
+    double cardWidth =
+        screenWidth < 600 ? screenWidth * 0.45 : screenWidth * 0.30;
+
+    return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(category)
           .orderBy('timeStamp', descending: true)
           .snapshots(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      builder: (context, snapshot) {
+        /// error
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+            child: Text(
+              'Error: ${snapshot.error}',
+              style: const TextStyle(fontFamily: 'Ubuntu'),
+            ),
+          );
         }
 
+        /// loading
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-              child: CircularProgressIndicator(color: Colors.grey[700]));
+            child: CircularProgressIndicator(
+              color: Colors.grey[700],
+            ),
+          );
         }
 
-        if (snapshot.data!.docs.isEmpty) {
+        /// empty data
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return const Center(
             child: Text(
               'No Foods found',
@@ -45,43 +62,43 @@ class FoodBuilder extends StatelessWidget {
         }
 
         List foods = snapshot.data!.docs;
+
+        int itemCount = foods.length <= 5
+            ? foods.length
+            : numberOfCards == 5
+                ? 5
+                : foods.length;
+
         return ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: foods.length <= 5
-              ? foods.length
-              : numberOfCards == 5
-                  ? 5
-                  : foods.length,
+          itemCount: itemCount,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(
-                      foodName: foods[index]['foodName'],
-                      foodPrice: foods[index]['foodPrice'],
-                      image: foods[index]['foodImage'],
-                      food: foods[index],
+            var food = foods[index];
+
+            return Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsScreen(
+                        foodName: food['foodName'],
+                        foodPrice: food['foodPrice'],
+                        image: food['foodImage'],
+                        food: food,
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: Row(
-                children: [
-                  const SizedBox(width: 15),
-                  FoodItem(
-                    food: foods[index],
+                  );
+                },
+                child: SizedBox(
+                  width: cardWidth,
+                  child: FoodItem(
+                    food: food,
                     category: category,
                     adminActions: adminActions,
-                    cardHeight: 280,
-                    cardWidth: 200,
-                    imageSize: 150,
-                    nameSize: 20,
-                    priceSize: 14,
-                    padding: 2,
                   ),
-                ],
+                ),
               ),
             );
           },

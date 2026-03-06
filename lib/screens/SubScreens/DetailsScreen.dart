@@ -84,6 +84,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   void initState() {
     checkDocumentExistence();
     _fetchUserRole();
+
     super.initState();
   }
 
@@ -144,6 +145,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        surfaceTintColor: Colors.grey[300],
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         leading: GestureDetector(

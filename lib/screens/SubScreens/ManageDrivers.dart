@@ -16,6 +16,7 @@ class _ManageDriversState extends State<ManageDrivers> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        surfaceTintColor: Colors.grey[300],
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         leading: GestureDetector(
@@ -34,7 +35,7 @@ class _ManageDriversState extends State<ManageDrivers> {
           children: [
             Spacer(flex: 1),
             Text(
-              'Drivers',
+              'Manage Drivers',
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'Ubuntu',
@@ -70,30 +71,44 @@ class _ManageDriversState extends State<ManageDrivers> {
               );
             }
 
-            List drivers = snapshot.data!.docs;
+            List drivers = snapshot.data!.docs
+                .where((doc) => doc['role'] == 'driver')
+                .toList();
 
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/flick-to-left.png',
-                      width: 18,
-                    ),
-                    const SizedBox(width: 10),
-                    const Text(
-                      'Swipe The Item For More Details',
-                      style: TextStyle(fontFamily: 'Ubuntu'),
-                    ),
-                  ],
+            if (drivers.isEmpty) {
+              return Center(
+                child: Text(
+                  'No Drivers Available 😊',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Ubuntu',
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 110, 124, 148),
+                  ),
                 ),
-                const SizedBox(height: 7),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: drivers.length,
-                    itemBuilder: (context, index) {
-                      if (drivers[index]['role'] == 'driver') {
+              );
+            } else {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/flick-to-left.png',
+                        width: 18,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Swipe The Item For More Details',
+                        style: TextStyle(fontFamily: 'Ubuntu'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: drivers.length,
+                      itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(2),
                           child: Center(
@@ -243,14 +258,12 @@ class _ManageDriversState extends State<ManageDrivers> {
                             ),
                           ),
                         );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
+                      },
+                    ),
                   ),
-                ),
-              ],
-            );
+                ],
+              );
+            }
           },
         ),
       ),

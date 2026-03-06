@@ -39,7 +39,7 @@ class _OrderTimeState extends State<OrderTime> {
           children: [
             Spacer(flex: 1),
             Text(
-              'ORDER TIME',
+              'Edit Order Time',
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'Ubuntu',
